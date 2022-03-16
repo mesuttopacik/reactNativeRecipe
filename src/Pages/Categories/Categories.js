@@ -7,9 +7,8 @@ import Config from 'react-native-config';
 import useFetch from '../../hooks/useFetch/useFetch';
 
 const Categories = ({navigation}) => {
+  const {error, data, loading} = useFetch(Config.API_URL_CATEGORIES);
 
-  const {error, data, loading} = useFetch(Config.API_URL_CATEGORIES)
-  
   const goToDetailHandler = e => {
     navigation.navigate('Meals', e);
   };
@@ -25,13 +24,12 @@ const Categories = ({navigation}) => {
   if (loading) {
     return <ActivityIndicator size="large" />;
   }
-  if(error){
-    return <Text>someting went wrong: {error}</Text>
+  if (error) {
+    return <Text>someting went wrong: {error}</Text>;
   }
   return (
     <View style={styles.container}>
       <FlatList data={data.categories} renderItem={renderCardItem} />
-      {/* <Button title="go to Meals" onPress={navigateHandler}/> */}
     </View>
   );
 };

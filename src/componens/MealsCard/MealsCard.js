@@ -1,13 +1,19 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import styles from './MealsCard.style'
+import {View, Text, ImageBackground, TouchableOpacity} from 'react-native';
+import React from 'react';
+import styles from './MealsCard.style';
 
-const MealsCard = () => {
+const MealsCard = ({name, img, onPress}) => {
   return (
-    <View style = {styles.container}>
-      <Text>MealsCard</Text>
-    </View>
-  )
-}
+    <TouchableOpacity onPress={onPress} style={styles.Container}>
+      <ImageBackground
+        style={styles.mealImg}
+        source={{
+          uri: img,
+        }}>
+        <Text style={styles.imgText}>{name}</Text>
+      </ImageBackground>
+    </TouchableOpacity>
+  );
+};
 
-export default MealsCard
+export default MealsCard;

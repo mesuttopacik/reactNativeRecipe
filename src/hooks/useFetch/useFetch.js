@@ -3,23 +3,23 @@ import axios from 'axios';
 
 const useFetch = url => {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
   const [data, setData] = useState([]);
+
+  fetchData = async () => {
+    try {
+      const {data: responceData} = await axios.get(url);
+      setData(responceData);
+      setLoading(false);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     fetchData();
   }, []);
-
-  fetchData = async () => {
-    try {
-      const {data} = await axios.get(url);
-      setData(data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      setError(error.message);
-    }
-  };
 
   return {error, loading, data};
 };
